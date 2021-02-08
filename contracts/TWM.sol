@@ -39,6 +39,7 @@ contract TWM is Context, IERC20 {
     mapping (address => mapping (address => uint256)) private _allowances;
 
     uint256 private _totalSupply;
+    uint256 private _cap = 1_000_000_000e18; // 1 billion TWM
 
     string private _name = "TheWebMason Token";
     string private _symbol = "TWM";
@@ -93,6 +94,13 @@ contract TWM is Context, IERC20 {
      */
     function totalSupply() public view virtual override returns (uint256) {
         return _totalSupply;
+    }
+
+    /**
+     * @dev Returns the cap on the token's total supply.
+     */
+    function cap() public view virtual returns (uint256) {
+        return _cap;
     }
 
     /**
@@ -300,5 +308,9 @@ contract TWM is Context, IERC20 {
      *
      * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
      */
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {
+        if (from == address(0)) { // When minting tokens
+            require(totalSupply().add(amount) <= cap(), "ERC20Capped: cap exceeded");
+        }
+    }
 }
