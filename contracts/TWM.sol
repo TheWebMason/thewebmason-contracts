@@ -158,7 +158,7 @@ contract TWM is Context, Ownable, IERC20 {
      */
     function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
         _transfer(sender, recipient, amount);
-        _approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
+        _approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "TWM: transfer amount exceeds allowance"));
         return true;
     }
 
@@ -194,7 +194,7 @@ contract TWM is Context, Ownable, IERC20 {
      * `subtractedValue`.
      */
     function decreaseAllowance(address spender, uint256 subtractedValue) public virtual returns (bool) {
-        _approve(_msgSender(), spender, _allowances[_msgSender()][spender].sub(subtractedValue, "ERC20: decreased allowance below zero"));
+        _approve(_msgSender(), spender, _allowances[_msgSender()][spender].sub(subtractedValue, "TWM: decreased allowance below zero"));
         return true;
     }
 
@@ -232,7 +232,7 @@ contract TWM is Context, Ownable, IERC20 {
      * `amount`.
      */
     function burnFrom(address account, uint256 amount) public virtual {
-        uint256 decreasedAllowance = allowance(account, _msgSender()).sub(amount, "ERC20: burn amount exceeds allowance");
+        uint256 decreasedAllowance = allowance(account, _msgSender()).sub(amount, "TWM: burn amount exceeds allowance");
 
         _approve(account, _msgSender(), decreasedAllowance);
         _burn(account, amount);
@@ -253,12 +253,12 @@ contract TWM is Context, Ownable, IERC20 {
      * - `sender` must have a balance of at least `amount`.
      */
     function _transfer(address sender, address recipient, uint256 amount) internal virtual {
-        require(sender != address(0), "ERC20: transfer from the zero address");
-        require(recipient != address(0), "ERC20: transfer to the zero address");
+        require(sender != address(0), "TWM: transfer from the zero address");
+        require(recipient != address(0), "TWM: transfer to the zero address");
 
         _beforeTokenTransfer(sender, recipient, amount);
 
-        _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
+        _balances[sender] = _balances[sender].sub(amount, "TWM: transfer amount exceeds balance");
         _balances[recipient] = _balances[recipient].add(amount);
         emit Transfer(sender, recipient, amount);
     }
@@ -273,7 +273,7 @@ contract TWM is Context, Ownable, IERC20 {
      * - `to` cannot be the zero address.
      */
     function _mint(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: mint to the zero address");
+        require(account != address(0), "TWM: mint to the zero address");
 
         _beforeTokenTransfer(address(0), account, amount);
 
@@ -294,11 +294,11 @@ contract TWM is Context, Ownable, IERC20 {
      * - `account` must have at least `amount` tokens.
      */
     function _burn(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: burn from the zero address");
+        require(account != address(0), "TWM: burn from the zero address");
 
         _beforeTokenTransfer(account, address(0), amount);
 
-        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
+        _balances[account] = _balances[account].sub(amount, "TWM: burn amount exceeds balance");
         _totalSupply = _totalSupply.sub(amount);
         emit Transfer(account, address(0), amount);
     }
@@ -317,8 +317,8 @@ contract TWM is Context, Ownable, IERC20 {
      * - `spender` cannot be the zero address.
      */
     function _approve(address owner, address spender, uint256 amount) internal virtual {
-        require(owner != address(0), "ERC20: approve from the zero address");
-        require(spender != address(0), "ERC20: approve to the zero address");
+        require(owner != address(0), "TWM: approve from the zero address");
+        require(spender != address(0), "TWM: approve to the zero address");
 
         _allowances[owner][spender] = amount;
         emit Approval(owner, spender, amount);
@@ -340,7 +340,7 @@ contract TWM is Context, Ownable, IERC20 {
      */
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {
         if (from == address(0)) { // When minting tokens
-            require(totalSupply().add(amount) <= cap(), "ERC20Capped: cap exceeded");
+            require(totalSupply().add(amount) <= cap(), "TWM: cap exceeded");
         }
     }
 }
