@@ -40,9 +40,9 @@ contract TWM is Context, IERC20 {
 
     uint256 private _totalSupply;
 
-    string private _name;
-    string private _symbol;
-    uint8 private _decimals;
+    string private _name = "TheWebMason Token";
+    string private _symbol = "TWM";
+    uint8 private _decimals = 18;
 
     /**
      * @dev Sets the values for {name} and {symbol}, initializes {decimals} with
@@ -53,10 +53,7 @@ contract TWM is Context, IERC20 {
      * All three of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor (string memory name_, string memory symbol_) public {
-        _name = name_;
-        _symbol = symbol_;
-        _decimals = 18;
+    constructor () public {
     }
 
     /**
