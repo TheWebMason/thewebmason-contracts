@@ -284,17 +284,6 @@ contract TWM is Context, IERC20 {
     }
 
     /**
-     * @dev Sets {decimals} to a value other than the default one of 18.
-     *
-     * WARNING: This function should only be called from the constructor. Most
-     * applications that interact with token contracts will not expect
-     * {decimals} to ever change, and may work incorrectly if it does.
-     */
-    function _setupDecimals(uint8 decimals_) internal virtual {
-        _decimals = decimals_;
-    }
-
-    /**
      * @dev Hook that is called before any transfer of tokens. This includes
      * minting and burning.
      *
