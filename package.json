@@ -1,0 +1,66 @@
+{
+  "name": "@thewebmason/contracts",
+  "version": "0.1.0",
+  "description": "TheWebMason Contracts",
+  "license": "MIT",
+  "author": {
+    "name": "TheWebMason",
+    "email": "support@TheWebMason.org",
+    "url": "https://www.TheWebMason.org"
+  },
+  "homepage": "https://github.com/TheWebMason/thewebmason-contracts#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheWebMason/thewebmason-contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheWebMason/thewebmason-contracts/issues",
+    "email": "support@TheWebMason.org"
+  },
+  "scripts": {
+    "clean": "rimraf ./build/",
+    "precompile": "yarn clean",
+    "compile": "truffle compile",
+    "postcompile": "yarn run zip-dir ./build compiled",
+    "pretest": "yarn compile",
+    "test": "truffle test",
+    "predeploy": "yarn compile",
+    "deploy": "truffle migrations --network",
+    "postdeploy": "yarn run zip-dir . deployed",
+    "verify": "truffle run verify --network",
+    "prepublishOnly": "yarn test",
+    "postpublishOnly": "yarn run zip-dir . published",
+    "ganache-cli": "ganache-cli",
+    "mnemonic": "mnemonics",
+    "zip-dir": "node ./scripts/zip-dir.js"
+  },
+  "files": [
+    "contracts",
+    "abi"
+  ],
+  "devDependencies": {
+    "@openzeppelin/contracts": "^3.4.0",
+    "@truffle/hdwallet-provider": "^1.2.1",
+    "ganache-cli": "^6.12.2",
+    "ncp": "^2.0.0",
+    "rimraf": "^3.0.2",
+    "truffle": "^5.1.65",
+    "truffle-plugin-verify": "^0.5.4",
+    "zip-dir": "^2.0.0"
+  },
+  "keywords": [
+    "Ethereum",
+    "TheWebMason",
+    "ERC20",
+    "Token",
+    "Contract",
+    "ABI"
+  ],
+  "contributors": [
+    {
+      "name": "Aleksandr Ivannikov",
+      "email": "dev@an-ivannikov.com",
+      "url": "https://an-ivannikov.com/"
+    }
+  ]
+}
