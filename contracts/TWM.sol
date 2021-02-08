@@ -199,6 +199,19 @@ contract TWM is Context, Ownable, IERC20 {
     }
 
     /**
+     * @dev Creates `amount` new tokens for `to`.
+     *
+     * See {ERC20-_mint}.
+     *
+     * Requirements:
+     *
+     * - the caller must be owner.
+     */
+    function mint(address account, uint256 amount) public virtual onlyOwner {
+        _mint(account, amount);
+    }
+
+    /**
      * @dev Destroys `amount` tokens from the caller.
      *
      * See {ERC20-_burn}.
