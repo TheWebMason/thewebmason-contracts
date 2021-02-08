@@ -3,6 +3,7 @@
 pragma solidity >=0.6.0 <0.8.0;
 
 import "./Context.sol";
+import "./Ownable.sol";
 import "./IERC20.sol";
 import "./SafeMath.sol";
 
@@ -31,7 +32,7 @@ import "./SafeMath.sol";
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IERC20-approve}.
  */
-contract TWM is Context, IERC20 {
+contract TWM is Context, Ownable, IERC20 {
     using SafeMath for uint256;
 
     mapping (address => uint256) private _balances;
