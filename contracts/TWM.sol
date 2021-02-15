@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity >=0.6.0 <0.8.0;
 
 import "./Mintable.sol";
-import "./IERC20.sol";
-import "./SafeMath.sol";
+import "./interfaces/IERC20.sol";
+import "./libraries/SafeMath.sol";
 
 
 contract TWM is Mintable, IERC20 {
@@ -18,7 +17,7 @@ contract TWM is Mintable, IERC20 {
     uint8 private _decimals = 18;
 
     uint256 private _totalSupply;
-    uint256 private _cap = 1_000_000_000e18; // 1 billion TWM
+    uint256 private _cap = 1_000_000_000e18;
 
     constructor () public {
         addMinter(_msgSender());
