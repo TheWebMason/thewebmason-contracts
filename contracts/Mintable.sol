@@ -10,8 +10,6 @@ abstract contract Mintable is Ownable {
     event AddedMinter(address indexed minter);
     event RemovedMinter(address indexed minter);
 
-    constructor () internal { }
-
     function addMinter(address account) public virtual onlyOwner {
         _minters[account] = true;
         emit AddedMinter(account);
